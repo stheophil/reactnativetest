@@ -8,9 +8,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "19.0.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-native": "0.78.3",
-    "react-native-macos": "^0.78.6"
+    "react-native-macos": "^0.78.6",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
