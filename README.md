@@ -1,52 +1,46 @@
 > ChatGPT generated setup tutorial
 
-Cross-Platform UI with React Native (Windows, macOS, and Web)
+# Cross-Platform UI with React Native (Windows, macOS, and Web)
 
-Setting Up the React Native Toolchain (Windows & macOS)
+## Setting Up the React Native Toolchain (Windows & macOS)
 
-On Windows: Install the latest Visual Studio (2019 or 2022) with the necessary workloads for C++ and UWP development. In Visual Studio’s installer, ensure you include “Desktop development with C++” (including the latest MSVC build tools), “.NET Desktop development”, and “Universal Windows Platform (UWP) development” with C++ tools ￼. This provides the C++ toolchain and Windows SDK needed for React Native for Windows. Enable Developer Mode in Windows settings and install the .NET 6 SDK as required by React Native for Windows ￼.
+## Install dependencies 
 
-Next, install Node.js (LTS version) and Yarn. Node.js is required for the React Native CLI and Metro bundler, and Yarn (or npm) will manage JavaScript dependencies. You can install Node from the official website and Yarn via the Yarn installer or npm ￼. It’s also recommended to install git and to enable long path support on Windows if not already enabled ￼ ￼. After setting up these dependencies, use the React Native CLI to initialize your project and add the Windows platform. For example:
+Windows: 
+https://microsoft.github.io/react-native-windows/docs/rnw-dependencies
 
-# Create a new React Native project (TypeScript template)
-npx --yes @react-native-community/cli init MyApp --template react-native-template-typescript
+macOS: 
+```sh
+brew install cocoapods
+brew install node
+brew install watchman
+```
 
-cd MyApp
-
-# Add React Native for Windows to the project
-yarn add react-native-windows@latest
-npx react-native init-windows 
-
-This will generate a Visual Studio solution (MyApp.sln) under the windows/ folder. You can open this solution in Visual Studio to build and run the Windows app. Ensure you have a web browser open (for debugging) and run npx react-native run-windows to launch the app from the command line ￼. Visual Studio or the CLI will compile the C++ code (which includes the React Native for Windows runtime and your app) and start Metro to bundle the JavaScript.
-
-On macOS: Make sure you have a Mac running macOS High Sierra (10.13) or newer ￼. Install Xcode (version 11.3.1 or newer) from the App Store and then open Xcode’s Preferences -> Locations to install the Command Line Tools ￼. You will also need to install CocoaPods (Ruby gem) for managing iOS/macOS native dependencies:
-
-sudo gem install cocoapods [oai_citation:8‡microsoft.github.io](https://microsoft.github.io/react-native-windows/docs/rnm-dependencies#:~:text=,down.%20%2A%20Install%20CocoaPods)
-
-For the JavaScript side, install Node.js LTS (e.g. via Homebrew: brew install node) and Watchman (brew install watchman), which is a file-watcher that React Native uses on macOS ￼. Yarn can be installed via Homebrew or npm as well. With these in place, you can initialize a React Native project the same way (the CLI’s default template now supports TypeScript by default). To add macOS support, install the React Native macOS extension provided by Microsoft. From your project directory, run:
-
-**DONE**
-**Use brew install cocoapods**
-
-npx @react-native-community/cli init MyApp --template react-native-template-typescript
-
-**typescript template is now the default**
-
-cd MyApp
-npx react-native-macos-init [oai_citation:10‡microsoft.github.io](https://microsoft.github.io/react-native-windows/docs/rnm-getting-started#:~:text=Install%20React%20Native%20for%20macOS) [oai_citation:11‡microsoft.github.io](https://microsoft.github.io/react-native-windows/docs/rnm-getting-started#:~:text=Install%20the%20macOS%20extension)
-npx react-native run-macos
-
-**Fails because react-native-macos lags behind react-native**
-**Use**
+## Initialize project
 
 ```sh
 npx @react-native-community/cli init <projectName> --version 0.78
 npx react-native-macos-init
 npx react-native run-macos
-(and in parallel: yarn start)
+# and in parallel: npm start
+
+# install matching version
+npm add react-native-windows@^0.78
+# install new cpp-based template
+npx react-native init-windows --template cpp-app --overwrite
+npx @react-native-community/cli run-windows
+
 ```
 
-This will add a macos/ folder with an Xcode workspace for the macOS app and build and launch it. You can also open the .xcworkspace in Xcode to run the app ￼. Ensure CocoaPods has installed any native modules. The React Native for macOS code will be compiled (Objective-C/C++ bridging code and your app) and it will use Node/Metro to bundle the JavaScript.
+https://microsoft.github.io/react-native-windows/docs/metro-config-out-tree-platforms
+
+## Initializing react-native-web
+
+`react-native-web`, mac and windows are usually not in sync regarding their dependencies. For macOS and windows we can fix that by updating them in sync. `react-native-web` is completely independent. 
+
+I have followed https://dev.to/mikehamilton00/adding-web-support-to-a-react-native-project-in-2023-4m4l to setup subfolder `web` with its own build tools etc. We only need a setup that shares the UI sources, or parts of them. 
+
+# TODO:
 
 For Web: The “web” target is handled via React Native for Web, which is a library that maps React Native components to web DOM elements. You don’t need a special SDK like Visual Studio or Xcode for web, but you do need a bundler (like Webpack or Metro) configured for web output. If you use Expo (discussed below), web support is built-in (you can run expo start --web). For a CLI project, you can add web support by installing react-native-web and a tool like Webpack or Next.js. For example, you can create a React Native project and then install react-native-web and configure Babel/Webpack to alias React Native to react-native-web ￼. Many developers use frameworks like Expo or Next.js to simplify this. In summary, for web you primarily need Node.js and a build tool; your React Native code (in TypeScript/JSX) will run in the browser using the React Native Web adapter.
 
