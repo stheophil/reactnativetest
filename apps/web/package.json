@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@org/web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,9 +8,10 @@
     "build": "webpack --config webpack.config.js --mode production"
   },
   "dependencies": {
-    "@react-native/new-app-screen": "0.81.0",
+    "@org/common": "workspace:*",
+    "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-native": "0.81.0",
+    "react-native": "^0.78.0",
     "react-native-safe-area-context": "^5.5.2",
     "react-native-web": "^0.21.0"
   },

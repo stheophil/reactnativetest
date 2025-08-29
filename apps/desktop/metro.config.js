@@ -8,13 +8,13 @@ const rnwPath = fs.realpathSync(
   path.resolve(require.resolve('react-native-windows/package.json'), '..'),
 );
 
-//
+
 
 /**
  * Metro configuration
  * https://facebook.github.io/metro/docs/configuration
  *
- * @type {import('metro-config').MetroConfig}
+ * * @type {import('@react-native/metro-config').MetroConfig}
  */
 
 const config = {

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "jsx": "react-native",
+    "strict": true,
+    "outDir": "dist",
+    "noEmit": false,
+    "skipLibCheck": true
+  },
+  "exclude": [
+        "./dist/**/*" // This is what fixed it!
+    ]
+}

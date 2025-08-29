@@ -40,6 +40,9 @@ https://microsoft.github.io/react-native-windows/docs/metro-config-out-tree-plat
 
 I have followed https://dev.to/mikehamilton00/adding-web-support-to-a-react-native-project-in-2023-4m4l to setup subfolder `web` with its own build tools etc. We only need a setup that shares the UI sources, or parts of them. 
 
+
+Follow https://blog.cvoice.io/how-to-setup-a-react-native-monorepo for setting up monorepo. 
+
 # TODO:
 
 For Web: The “web” target is handled via React Native for Web, which is a library that maps React Native components to web DOM elements. You don’t need a special SDK like Visual Studio or Xcode for web, but you do need a bundler (like Webpack or Metro) configured for web output. If you use Expo (discussed below), web support is built-in (you can run expo start --web). For a CLI project, you can add web support by installing react-native-web and a tool like Webpack or Next.js. For example, you can create a React Native project and then install react-native-web and configure Babel/Webpack to alias React Native to react-native-web ￼. Many developers use frameworks like Expo or Next.js to simplify this. In summary, for web you primarily need Node.js and a build tool; your React Native code (in TypeScript/JSX) will run in the browser using the React Native Web adapter.

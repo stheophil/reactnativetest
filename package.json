@@ -1,0 +1,21 @@
+{
+  "name": "@org/reactnativetest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ReactNative test for Windows, macOS, web",
+  "homepage": "https://github.com/stheophil/reactnativetest",
+  "bugs": {
+    "url": "https://github.com/stheophil/reactnativetest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stheophil/reactnativetest.git"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "common/*"
+    ]
+  },
+  "packageManager": "yarn@4.9.4"
+}
