@@ -27,6 +27,8 @@ const config = {
       path.resolve(__dirname, 'node_modules'),
       path.resolve(monorepoRoot, 'node_modules'),
     ],
+    sourceExts: [...require('metro-config/src/defaults/defaults').sourceExts, 'mjs', 'cjs'],
+    unstable_enablePackageExports: true,
     blockList: exclusionList([
       // This stops "npx @react-native-community/cli run-windows" from causing the metro server to crash if its already running
       new RegExp(
