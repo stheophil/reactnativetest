@@ -24,6 +24,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { HelloWorld } from '@org/common'
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -93,7 +95,7 @@ function App(): React.JSX.Element {
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
             
-            Hello World Windows 🎉
+            <HelloWorld/>
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />

@@ -15,13 +15,13 @@
     "tsc": "tsc --noEmit"
   },
   "types": "dist/index.d.ts",
-  "main": "./dist/shared-elements-cjs.js",
-  "module": "./dist/shared-elements-es.js",
-  "react-native": "./dist/shared-elements-es.js",
+  "main": "./dist/common-cjs.js",
+  "module": "./dist/common-es.js",
+  "react-native": "./index.tsx",
   "exports": {
     ".": {
-      "import": "./dist/shared-elements-es.js",
-      "require": "./dist/shared-elements-cjs.js",
+      "import": "./dist/common-es.js",
+      "require": "./dist/common.js",
       "types": "./dist/index.d.ts"
     }
   },

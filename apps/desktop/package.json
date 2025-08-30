@@ -10,6 +10,7 @@
     "test:windows": "jest --config jest.config.windows.js"
   },
   "dependencies": {
+    "@org/common": "workspace:*",
     "react": "19.0.0",
     "react-native": "0.78.3",
     "react-native-macos": "^0.78.6",

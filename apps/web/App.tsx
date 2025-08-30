@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {HelloWorld} from "@org/common";
 
 const App = () => {
   return (
@@ -10,7 +11,7 @@ const App = () => {
         alignItems: 'center',
         backgroundColor: 'purple',
       }}>
-      <Text>Hello, world to the Web!</Text>
+      <HelloWorld/>
     </View>
   );
 };

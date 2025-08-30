@@ -8,7 +8,7 @@ const rnwPath = fs.realpathSync(
   path.resolve(require.resolve('react-native-windows/package.json'), '..'),
 );
 
-
+const monorepoRoot = path.resolve(__dirname, '../..');
 
 /**
  * Metro configuration
@@ -16,10 +16,17 @@ const rnwPath = fs.realpathSync(
  *
  * * @type {import('@react-native/metro-config').MetroConfig}
  */
-
 const config = {
-  //
+  watchFolders: [
+    // Add the monorepo root to the watch folders
+    monorepoRoot,
+  ],
   resolver: {
+    // Make sure Metro can resolve modules from the root node_modules
+    nodeModulesPaths: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(monorepoRoot, 'node_modules'),
+    ],
     blockList: exclusionList([
       // This stops "npx @react-native-community/cli run-windows" from causing the metro server to crash if its already running
       new RegExp(
@@ -30,7 +37,11 @@ const config = {
       new RegExp(`${rnwPath}/target/.*`),
       /.*\.ProjectImports\.zip/,
     ]),
-    //
+    // Ensure that only one copy of react and react-native is used
+    extraNodeModules: {
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+    },
   },
   transformer: {
     getTransformOptions: async () => ({

@@ -3,24 +3,19 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
+const monorepoRoot = path.resolve(__dirname, '../..'); 
 const appDirectory = path.resolve(__dirname, '.');
+const packagesWorkspace = path.resolve(monorepoRoot, "common");
+const appNodeModules = path.resolve(__dirname, 'node_modules');
 
 const babelConfig = require('./babel.config');
 
 // Babel loader configuration
 const babelLoaderConfiguration = {
   test: /\.(tsx|jsx|ts|js)?$/,
-  exclude: [
-    {
-      and: [
-        // babel will exclude these from transpling
-        path.resolve(appDirectory, 'node_modules'),
-        path.resolve(appDirectory, 'ios'),
-        path.resolve(appDirectory, 'android'),
-      ],
-      // whitelisted modules to be transpiled by babel
-      not: [],
-    },
+  include: [
+    path.resolve(appDirectory),   // the app itself
+    packagesWorkspace            // your shared packages
   ],
   use: {
     loader: 'babel-loader',
@@ -70,16 +65,25 @@ module.exports = argv => {
       chunkFilename: '[id].[chunkhash].js',
     },
     resolve: {
-      extensions: [
-        '.web.js',
-        '.js',
-        '.web.ts',
-        '.ts',
-        '.web.jsx',
-        '.jsx',
-        '.web.tsx',
-        '.tsx',
-      ],
+      extensions: ['.web.js','.js','.web.ts','.ts','.web.jsx','.jsx','.web.tsx','.tsx'],
+      // Always try the app's node_modules first
+      modules: [appNodeModules, 'node_modules'],
+      symlinks: true, // follow workspace symlinks (default true)
+      alias: {
+        // React stack: ensure one physical copy
+        react: path.resolve(appNodeModules, 'react'),
+        'react-dom': path.resolve(appNodeModules, 'react-dom'),
+        'react-native': path.resolve(appNodeModules, 'react-native'),
+        'react-native-web': path.resolve(appNodeModules, 'react-native-web'),
+
+        // Often-used RN libs (add as you adopt them)
+        '@react-native': path.resolve(appNodeModules, '@react-native'),
+        '@react-native-community': path.resolve(appNodeModules, '@react-native-community'),
+
+        // Your org namespace: import '@your-org/foo' from packages/foo/src
+        // (adjust if your packages build to dist/)
+        '@org': packagesWorkspace,
+      },
     },
     module: {
       rules: [

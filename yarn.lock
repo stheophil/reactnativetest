@@ -2361,9 +2361,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@org/common@workspace:*, @org/common@workspace:common/src":
+"@org/common@workspace:*, @org/common@workspace:common/common":
   version: 0.0.0-use.local
-  resolution: "@org/common@workspace:common/src"
+  resolution: "@org/common@workspace:common/common"
   dependencies:
     "@types/react": "npm:^19.1.12"
     "@types/react-native": "npm:^0.73.0"
